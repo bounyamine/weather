@@ -6,12 +6,12 @@ function App() {
   const [city, setCity] = useState('Paris');
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Nouvel état pour le loader
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = () => {
     if (city === '') return;
 
-    setIsLoading(true); // Démarrage du loader
+    setIsLoading(true);
     const url = `https://cweather.vercel.app/${city}`;
 
     fetch(url)
@@ -24,11 +24,11 @@ function App() {
           setError(false);
           setWeather(json);
         }
-        setIsLoading(false); // Arrêt du loader après chargement des données
+        setIsLoading(false);
       })
       .catch(() => {
         setError(true);
-        setIsLoading(false); // Arrêt du loader en cas d'erreur
+        setIsLoading(false);
       });
   };
 
@@ -45,7 +45,6 @@ function App() {
         <button className="fa-solid fa-magnifying-glass" onClick={handleSearch}></button>
       </div>
 
-      {/* Affichage du loader pendant le chargement */}
       {isLoading && (
         <div className="loader"></div>
       )}
@@ -68,7 +67,6 @@ function App() {
             <p className="description">{weather.meteo.principal}</p>
           </div>
 
-          {/* Affichage du pays sous la ville */}
           <div className="location-country">
             <p>{city}, {weather.lieu.pays}</p>
           </div>
